@@ -30,91 +30,193 @@
   --color-ring: var(--ring);
   --color-success: var(--success);
   --color-warning: var(--warning);
-  --color-neon: var(--neon);
-  --color-neon-foreground: var(--neon-foreground);
+  --color-nebula: var(--nebula);
+  --color-nebula-foreground: var(--nebula-foreground);
+  --color-cosmos: var(--cosmos);
+  --color-stardust: var(--stardust);
+
+  --animate-twinkle: twinkle 4s ease-in-out infinite;
+  --animate-float-slow: float-slow 9s ease-in-out infinite;
+  --animate-orbit: orbit 30s linear infinite;
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-aurora: aurora 14s ease infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-shoot: shoot 3.5s ease-in infinite;
+  --animate-rise: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-warp-in: warp-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-12px) translateX(6px); }
+}
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(40px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(40px) rotate(-360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes aurora {
+  0%, 100% { background-position: 0% 50%, 100% 50%; }
+  50% { background-position: 100% 50%, 0% 50%; }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px -2px var(--primary), 0 0 40px -10px var(--nebula); }
+  50% { box-shadow: 0 0 35px 0 var(--primary), 0 0 70px -8px var(--nebula); }
+}
+@keyframes shoot {
+  0% { transform: translate3d(0,0,0) rotate(215deg); opacity: 0; }
+  10% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translate3d(-800px, 800px, 0) rotate(215deg); opacity: 0; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes warp-in {
+  from { opacity: 0; transform: scale(0.96) translateY(20px); filter: blur(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
 }
 
 :root {
-  --radius: 0.5rem;
-  /* Cyber dark theme by default */
-  --background: oklch(0.16 0.02 260);
-  --foreground: oklch(0.96 0.01 200);
-  --card: oklch(0.20 0.025 260);
-  --card-foreground: oklch(0.96 0.01 200);
-  --popover: oklch(0.20 0.025 260);
-  --popover-foreground: oklch(0.96 0.01 200);
-  --primary: oklch(0.78 0.18 180);
-  --primary-foreground: oklch(0.15 0.02 260);
-  --secondary: oklch(0.26 0.03 260);
-  --secondary-foreground: oklch(0.96 0.01 200);
-  --muted: oklch(0.24 0.025 260);
-  --muted-foreground: oklch(0.68 0.02 240);
-  --accent: oklch(0.30 0.06 280);
-  --accent-foreground: oklch(0.96 0.01 200);
-  --destructive: oklch(0.65 0.22 25);
+  --radius: 0.75rem;
+  /* Galaxy / deep-space palette */
+  --background: oklch(0.13 0.04 280);
+  --foreground: oklch(0.96 0.015 250);
+  --card: oklch(0.18 0.05 285);
+  --card-foreground: oklch(0.96 0.015 250);
+  --popover: oklch(0.16 0.05 285);
+  --popover-foreground: oklch(0.96 0.015 250);
+  --primary: oklch(0.74 0.18 285);          /* galactic violet */
+  --primary-foreground: oklch(0.12 0.04 280);
+  --secondary: oklch(0.24 0.05 285);
+  --secondary-foreground: oklch(0.96 0.015 250);
+  --muted: oklch(0.22 0.04 285);
+  --muted-foreground: oklch(0.72 0.03 270);
+  --accent: oklch(0.30 0.10 320);
+  --accent-foreground: oklch(0.98 0.01 250);
+  --destructive: oklch(0.65 0.24 18);
   --destructive-foreground: oklch(0.98 0 0);
-  --success: oklch(0.75 0.18 150);
-  --warning: oklch(0.82 0.16 85);
-  --neon: oklch(0.78 0.22 320);
-  --neon-foreground: oklch(0.15 0.02 260);
-  --border: oklch(0.30 0.03 260);
-  --input: oklch(0.26 0.03 260);
-  --ring: oklch(0.78 0.18 180);
+  --success: oklch(0.78 0.18 165);
+  --warning: oklch(0.85 0.17 80);
+  --nebula: oklch(0.72 0.22 330);            /* magenta nebula */
+  --nebula-foreground: oklch(0.12 0.04 280);
+  --cosmos: oklch(0.70 0.18 220);            /* cosmic cyan */
+  --stardust: oklch(0.92 0.08 95);           /* warm star */
+  --border: oklch(0.32 0.06 285 / 0.6);
+  --input: oklch(0.24 0.05 285);
+  --ring: oklch(0.74 0.18 285);
 
-  --gradient-cyber: linear-gradient(135deg, oklch(0.78 0.18 180), oklch(0.78 0.22 320));
-  --gradient-surface: linear-gradient(180deg, oklch(0.22 0.03 260), oklch(0.18 0.025 260));
-  --shadow-neon: 0 0 24px -4px oklch(0.78 0.18 180 / 0.5);
-  --shadow-glow: 0 0 60px -10px oklch(0.78 0.22 320 / 0.4);
+  --gradient-galaxy: linear-gradient(135deg, oklch(0.55 0.22 285), oklch(0.65 0.24 320), oklch(0.62 0.22 220));
+  --gradient-aurora: linear-gradient(120deg, oklch(0.62 0.22 220) 0%, oklch(0.65 0.24 285) 50%, oklch(0.65 0.24 320) 100%);
+  --gradient-nebula: radial-gradient(ellipse at center, oklch(0.65 0.24 320 / 0.45), transparent 70%);
+  --gradient-surface: linear-gradient(180deg, oklch(0.20 0.06 285 / 0.85), oklch(0.15 0.05 285 / 0.85));
+  --shadow-glow: 0 0 60px -10px oklch(0.74 0.22 285 / 0.55);
+  --shadow-nebula: 0 0 80px -20px oklch(0.72 0.24 330 / 0.6);
+  --shadow-cosmic: 0 20px 60px -25px oklch(0.55 0.22 285 / 0.7);
 }
 
 @layer base {
-  * {
-    border-color: var(--color-border);
-  }
+  * { border-color: var(--color-border); }
+  html, body { background-color: var(--color-background); color: var(--color-foreground); }
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
     background-image:
-      radial-gradient(ellipse 80% 60% at 20% 0%, oklch(0.78 0.18 180 / 0.08), transparent 60%),
-      radial-gradient(ellipse 60% 50% at 100% 100%, oklch(0.78 0.22 320 / 0.08), transparent 60%);
+      radial-gradient(ellipse 70% 50% at 15% 0%, oklch(0.55 0.22 285 / 0.25), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 10%, oklch(0.65 0.24 320 / 0.22), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 50% 100%, oklch(0.62 0.22 220 / 0.18), transparent 65%),
+      linear-gradient(180deg, oklch(0.10 0.04 280), oklch(0.14 0.05 285));
     background-attachment: fixed;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    min-height: 100vh;
   }
-  ::selection {
-    background-color: oklch(0.78 0.18 180 / 0.3);
+  ::selection { background-color: oklch(0.74 0.22 285 / 0.4); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, oklch(0.55 0.22 285 / 0.6), oklch(0.65 0.24 320 / 0.6));
+    border-radius: 999px;
   }
 }
 
 @layer utilities {
-  .gradient-cyber {
-    background-image: var(--gradient-cyber);
+  .gradient-galaxy { background-image: var(--gradient-galaxy); }
+  .gradient-aurora {
+    background-image: var(--gradient-aurora);
+    background-size: 200% 200%;
+    animation: aurora 14s ease infinite;
   }
   .gradient-text {
-    background-image: var(--gradient-cyber);
+    background-image: var(--gradient-aurora);
+    background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    animation: aurora 10s ease infinite;
   }
-  .glow-primary {
-    box-shadow: var(--shadow-neon);
-  }
-  .glow-neon {
-    box-shadow: var(--shadow-glow);
-  }
+  .glow-primary { box-shadow: var(--shadow-glow); }
+  .glow-nebula { box-shadow: var(--shadow-nebula); }
+  .glow-cosmic { box-shadow: var(--shadow-cosmic); }
   .surface-panel {
     background-image: var(--gradient-surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
-  .scanlines {
-    background-image: repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 2px,
-      oklch(1 0 0 / 0.015) 2px,
-      oklch(1 0 0 / 0.015) 3px
-    );
+  .panel-glass {
+    background-color: oklch(0.20 0.06 285 / 0.55);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid oklch(0.40 0.08 285 / 0.35);
+  }
+  .nebula-veil {
+    background-image: var(--gradient-nebula);
+  }
+  .shimmer {
+    background: linear-gradient(110deg, transparent 30%, oklch(1 0 0 / 0.08) 50%, transparent 70%);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
   }
   .font-mono-tight {
     font-family: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
     font-feature-settings: "calt", "liga";
+  }
+  .ring-galaxy {
+    box-shadow:
+      0 0 0 1px oklch(0.55 0.22 285 / 0.5),
+      0 0 0 4px oklch(0.55 0.22 285 / 0.15);
+  }
+  .text-glow { text-shadow: 0 0 18px oklch(0.74 0.22 285 / 0.7); }
+  .hover-lift { transition: transform .25s ease, box-shadow .25s ease; }
+  .hover-lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-cosmic); }
+
+  /* Starfield */
+  .starfield {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .star {
+    position: absolute; width: 2px; height: 2px; border-radius: 50%;
+    background: white; opacity: 0.7;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  .star.lg { width: 3px; height: 3px; box-shadow: 0 0 6px oklch(0.92 0.08 95 / 0.8); }
+  .star.tiny { width: 1px; height: 1px; opacity: 0.5; }
+  .shooting-star {
+    position: absolute; top: -10%; left: 110%;
+    width: 140px; height: 1px;
+    background: linear-gradient(-45deg, white, transparent);
+    filter: drop-shadow(0 0 6px white);
+    animation: shoot 6s ease-in infinite;
+  }
+  .planet {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(0.5px);
+    box-shadow: inset -10px -14px 30px oklch(0 0 0 / 0.5);
   }
 }
