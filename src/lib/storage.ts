@@ -1,6 +1,7 @@
 import type { Layout } from "./types";
 
 const KEY = "drive-architect:layouts";
+const HIST = "drive-architect:last";
 
 export const loadLayouts = (): Layout[] => {
   if (typeof window === "undefined") return [];
@@ -30,4 +31,17 @@ export const upsertLayout = (layout: Layout) => {
 
 export const deleteLayout = (id: string) => {
   saveLayouts(loadLayouts().filter((l) => l.id !== id));
+};
+
+export const persistLast = (layout: Layout) => {
+  if (typeof window === "undefined") return;
+  try { localStorage.setItem(HIST, JSON.stringify(layout)); } catch { /* noop */ }
+};
+
+export const loadLast = (): Layout | null => {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(HIST);
+    return raw ? (JSON.parse(raw) as Layout) : null;
+  } catch { return null; }
 };
